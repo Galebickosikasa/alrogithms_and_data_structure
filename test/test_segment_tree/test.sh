@@ -2,8 +2,8 @@
 mkdir tmp
 cd tmp
 g++ ../../../data_structures/segment_tree.cpp -fsanitize=undefined -fsanitize=address -o segment_tree
-g++ ../stupid.cpp -o stupid
-g++ ../gen.cpp -o gen
+g++ ../../test_RMQ/stupid.cpp -o stupid
+g++ ../../test_RMQ/gen.cpp -o gen
 
 for (( i = 0; i < 100; i++ )) do
 	./gen 1000 1000 > input
