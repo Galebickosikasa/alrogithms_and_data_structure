@@ -3,9 +3,9 @@
 
 using namespace std;
 
-const int inf = 2e9;
+#define int long long 
 
-int main() {
+signed main() {
 	int n;
 	cin >> n;
 	vector<int> v(n);
@@ -19,9 +19,9 @@ int main() {
 			int l, r;
 			cin >> l >> r;
 			--l, --r;
-			int mx = -inf;
-			for (int i = l; i <= r; ++i) mx = max(mx, v[i]);
-			cout << mx << '\n';
+			int ans = 0;
+			for (int i = l; i <= r; ++i) ans += v[i];
+			cout << ans << '\n';
 		} else if (x == '!') {
 			int i, value;
 			cin >> i >> value;

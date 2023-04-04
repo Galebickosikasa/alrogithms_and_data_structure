@@ -4,8 +4,7 @@
 using namespace std;
 
 #define sz(v) static_cast<int>(v.size())
-
-const int inf = 2e9;
+#define int long long
 
 class Tree {
 public:
@@ -15,9 +14,9 @@ public:
 		++sz;
 		sz = (1 << sz);
 		capacity = (sz >> 1);
-		t = vector<int>(sz, -inf);
+		t = vector<int>(sz);
 		for (int i = 0; i < sz(v); ++i) t[i + capacity] = v[i];
-		for (int i = capacity - 1; i > 0; --i) t[i] = max(t[i * 2], t[i * 2 + 1]);
+		for (int i = capacity - 1; i > 0; --i) t[i] = t[i * 2] + t[i * 2 + 1];
 	}
 
 	int get(int l, int r) {
@@ -29,7 +28,7 @@ public:
 		t[i] = value;
 		i >>= 1;
 		while (i) {
-			t[i] = max(t[i * 2], t[i * 2 + 1]);
+			t[i] = t[i * 2] + t[i * 2 + 1];
 			i >>= 1;
 		}
 	}
@@ -39,13 +38,13 @@ private:
 	int sz, capacity;
 
 	int get(int cur, int left, int right, int l, int r) {
-		if (right < l || left > r) return -inf;
+		if (right < l || left > r) return 0;
 		if (l <= left && r >= right) return t[cur];
-		return max(get(cur * 2, left, (left + right) / 2, l, r), get(cur * 2 + 1, (left + right) / 2 + 1, right, l, r));
+		return get(cur * 2, left, (left + right) / 2, l, r) + get(cur * 2 + 1, (left + right) / 2 + 1, right, l, r);
 	}
 };
 
-int main() {
+signed main() {
 	int n;
 	cin >> n;
 	vector<int> v(n);
