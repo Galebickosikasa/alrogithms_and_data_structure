@@ -1,12 +1,11 @@
 #include <iostream>
 #include <random>
-#include <string>
-#include <cassert>
 #include <chrono>
+#include <cassert>
 
 using namespace std;
 
-#define int long long
+#define int long long 
 
 mt19937_64 rnd(chrono::steady_clock::now().time_since_epoch().count());
 
@@ -16,7 +15,7 @@ signed main(signed argc, char** argv) {
 	int cntq = stoi(argv[2]);
 	cout << sizev << '\n';
 	for (int i = 0; i < sizev; ++i) {
-		int value = rnd() % (int)4e9 - (int)2e9;
+		int value = rnd() % (int)4e9 + (int)2e9;
 		cout << value << ' ';
 	}
 	cout << '\n' << cntq << '\n';
@@ -25,12 +24,14 @@ signed main(signed argc, char** argv) {
 		if (x) {
 			int l = rnd() % sizev + 1;
 			int r = rnd() % sizev + 1;
-			if (r < l) swap(l, r);
+			if (l > r) swap(l, r);
 			cout << "? " << l << ' ' << r << '\n';
 		} else {
-			int i = rnd() % sizev + 1;
-			int value = rnd() % (int)4e9 - (int)2e9;
-			cout << "! " << i << ' ' << value << '\n';
+			int l = rnd() % sizev + 1;
+			int r = rnd() % sizev + 1;
+			if (l > r) swap(l, r);
+			int value = rnd() % (int)4e9 + (int)2e9;
+			cout << "! " << l << ' ' << r << ' ' << value << '\n'; 
 		}
 	}
 }
