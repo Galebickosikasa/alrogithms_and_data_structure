@@ -101,9 +101,7 @@ T find(T root, int i) {
 
 T erase(T root, int i) {
 	if (!root) return root;
-	if (get_index(root) == i) {
-		return merge(root->left, root->right);
-	}
+	if (get_index(root) == i) return merge(root->left, root->right);
 	if (get_index(root) < i) root->right = erase(root->right, i - get_index(root));
 	else root->left = erase(root->left, i);
 	return render(root);
